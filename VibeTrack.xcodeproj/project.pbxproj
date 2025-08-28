@@ -29,9 +29,22 @@
 		86B0655C2E6E20A1008BB7E7 /* VibeTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VibeTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		863614DA2E6F1027004290E0 /* Exceptions for "VibeTrack" folder in "VibeTrack" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 86B065422E6E209F008BB7E7 /* VibeTrack */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		86B065452E6E209F008BB7E7 /* VibeTrack */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				863614DA2E6F1027004290E0 /* Exceptions for "VibeTrack" folder in "VibeTrack" target */,
+			);
 			path = VibeTrack;
 			sourceTree = "<group>";
 		};
@@ -271,6 +284,8 @@
 /* Begin XCBuildConfiguration section */
 		86B065642E6E20A1008BB7E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 86B065452E6E209F008BB7E7 /* VibeTrack */;
+			baseConfigurationReferenceRelativePath = Config/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -334,6 +349,8 @@
 		};
 		86B065652E6E20A1008BB7E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 86B065452E6E209F008BB7E7 /* VibeTrack */;
+			baseConfigurationReferenceRelativePath = Config/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -390,6 +407,8 @@
 		};
 		86B065672E6E20A1008BB7E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 86B065452E6E209F008BB7E7 /* VibeTrack */;
+			baseConfigurationReferenceRelativePath = Config/Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -399,6 +418,7 @@
 				DEVELOPMENT_TEAM = 9928L9NMRA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VibeTrack/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "VibeTrack needs microphone access to record your voice";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "VibeTrack needs speech recognition to log your meals by voice";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -422,6 +442,8 @@
 		};
 		86B065682E6E20A1008BB7E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 86B065452E6E209F008BB7E7 /* VibeTrack */;
+			baseConfigurationReferenceRelativePath = Config/Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -431,6 +453,7 @@
 				DEVELOPMENT_TEAM = 9928L9NMRA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VibeTrack/Info.plist;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "VibeTrack needs microphone access to record your voice";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "VibeTrack needs speech recognition to log your meals by voice";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -454,6 +477,8 @@
 		};
 		86B0656A2E6E20A1008BB7E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 86B065452E6E209F008BB7E7 /* VibeTrack */;
+			baseConfigurationReferenceRelativePath = Config/Config.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -472,6 +497,8 @@
 		};
 		86B0656B2E6E20A1008BB7E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 86B065452E6E209F008BB7E7 /* VibeTrack */;
+			baseConfigurationReferenceRelativePath = Config/Config.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -490,6 +517,8 @@
 		};
 		86B0656D2E6E20A1008BB7E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 86B065452E6E209F008BB7E7 /* VibeTrack */;
+			baseConfigurationReferenceRelativePath = Config/Config.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -506,6 +535,8 @@
 		};
 		86B0656E2E6E20A1008BB7E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 86B065452E6E209F008BB7E7 /* VibeTrack */;
+			baseConfigurationReferenceRelativePath = Config/Config.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
