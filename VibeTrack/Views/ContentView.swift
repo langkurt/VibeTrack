@@ -28,6 +28,8 @@ struct ContentView: View {
                 .tag(2)
         }
         .onAppear {
+            // Set unselected tab icon color to white
+            UITabBar.appearance().unselectedItemTintColor = UIColor.white
             LogManager.shared.log("ContentView appeared", category: .ui)
         }
     }
