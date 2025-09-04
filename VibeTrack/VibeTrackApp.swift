@@ -2,7 +2,6 @@ import SwiftUI
 
 @main
 struct VibeTrackApp: App {
-    let persistenceController = PersistenceController.shared
     @StateObject private var speechManager = SpeechManager()
     
     init() {
@@ -13,7 +12,6 @@ struct VibeTrackApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(speechManager)
         }
     }
