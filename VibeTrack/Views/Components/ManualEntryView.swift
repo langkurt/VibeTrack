@@ -4,6 +4,8 @@ struct ManualEntryView: View {
     let dataStore: FoodDataStore
     @Binding var isPresented: Bool
     @State private var textInput = ""
+    @State private var isSubmitting = false
+    @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
         NavigationView {
@@ -12,38 +14,44 @@ struct ManualEntryView: View {
                     .font(.headline)
                     .padding(.top)
                 
-                TextEditor(text: $textInput)
-                    .padding(8)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                    )
-                    .padding()
-                
-                if textInput.isEmpty {
-                    Text("Example: \"Had eggs for breakfast, salad for lunch\"")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                // Smaller, more controlled text input
+                VStack(alignment: .leading, spacing: 8) {
+                    TextField("e.g., \"Had eggs for breakfast, salad for lunch\"", text: $textInput, axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .lineLimit(3...6)
+                        .focused($isTextFieldFocused)
+                        .onSubmit {
+                            submitEntry()
+                        }
+                    
+                    if textInput.isEmpty {
+                        Text("Try: \"2 eggs and toast\" or \"Large coffee with milk\"")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
+                .padding(.horizontal)
                 
                 Spacer()
                 
-                Button(action: {
-                    LogManager.shared.log("Manual entry submitted: \(textInput)", category: .ui)
-                    Task {
-                        await dataStore.processVoiceInput(textInput)
-                        isPresented = false
+                // Submit button
+                Button(action: submitEntry) {
+                    HStack {
+                        if isSubmitting {
+                            ProgressView()
+                                .scaleEffect(0.8)
+                                .tint(.white)
+                        }
+                        Text(isSubmitting ? "Processing..." : "Log Food")
                     }
-                }) {
-                    Text("Log Food")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(textInput.isEmpty || isSubmitting ? Color.gray : Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
                 }
                 .padding()
-                .disabled(textInput.isEmpty)
+                .disabled(textInput.isEmpty || isSubmitting)
             }
             .navigationTitle("Manual Entry")
             .navigationBarTitleDisplayMode(.inline)
@@ -51,14 +59,44 @@ struct ManualEntryView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         LogManager.shared.log("Manual entry cancelled", category: .ui)
-                        isPresented = false
+                        dismissView()
+                    }
+                    .disabled(isSubmitting)
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        isTextFieldFocused = false
                     }
                 }
             }
         }
         .onAppear {
             LogManager.shared.log("ManualEntryView opened", category: .ui)
+            // Auto-focus the text field
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isTextFieldFocused = true
+            }
         }
     }
+    
+    private func submitEntry() {
+        guard !textInput.isEmpty && !isSubmitting else { return }
+        
+        LogManager.shared.log("Manual entry submitted: \(textInput)", category: .ui)
+        isSubmitting = true
+        isTextFieldFocused = false
+        
+        Task {
+            await dataStore.processVoiceInput(textInput)
+            await MainActor.run {
+                dismissView()
+            }
+        }
+    }
+    
+    private func dismissView() {
+        isTextFieldFocused = false
+        isPresented = false
+    }
 }
-

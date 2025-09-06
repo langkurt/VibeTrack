@@ -1,0 +1,12 @@
+TODO:
+- manual edit text box is too big and doesnt close when hitting send
+- should the backgrounds for the other pages be the gradient too or is that too much? 
+- need to do more testing in general: does the manual edit work, does the manual entry work, does search work?
+- push to gh
+-  semantic caching responses because users will most likely eat the same things multiple times.
+- suggested eating times and amounts based on learned behavior and weight loss goals
+-  offline handling. Store unset requests and play them back once connectivity is restored. 
+- cloud storage for user data / telemetry. 
+- Store input/output for AI responses. Evaluate those and make sure they are not deviating. Create the curated dataset based on if they are good or not, then train the SML to check all resposnses and report success metrics.
+- write an actual readme, not a todo list lmao
+- really consider how many fucks i actually give about this project

@@ -8,7 +8,7 @@ struct MainRecordingView: View {
     var body: some View {
         ZStack {
             // Gradient Background
-            GradientBackground()
+            AdaptiveGradientBackground(intensity: .full)
             
             VStack(spacing: 24) {
                 // Header
