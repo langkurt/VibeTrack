@@ -1,12 +1,12 @@
 TODO:
-- manual edit text box is too big and doesnt close when hitting send
-- should the backgrounds for the other pages be the gradient too or is that too much? 
-- need to do more testing in general: does the manual edit work, does the manual entry work, does search work?
-- push to gh
--  semantic caching responses because users will most likely eat the same things multiple times.
-- suggested eating times and amounts based on learned behavior and weight loss goals
--  offline handling. Store unset requests and play them back once connectivity is restored. 
-- cloud storage for user data / telemetry. 
-- Store input/output for AI responses. Evaluate those and make sure they are not deviating. Create the curated dataset based on if they are good or not, then train the SML to check all resposnses and report success metrics.
+- push to gh. Need instructions on how to create the gh repo and link the existing local repo to it. I always forget. ssh pref
+-  semantic caching responses because users will most likely eat the same things multiple times. Need to design this to flesh out the idea. Theres a couple papers worth readin on this because semantic caching is storing the users _intent_ not just the hashed input verbatim. So "avacado toast" and "toast with avocado" are both the same and a cache hit
+- suggested eating times and amounts based on learned behavior and weight loss goals. Need to think and design what this feature even is. Is it notificatoins? is it linear regressions on the user's chart data? 
+-  offline handling. Store unset requests and play them back once connectivity is restored. This should be relatively easy. 
+- cloud storage for user data / telemetry. Need to set up a cloud solution for receiving and analyzsing telemtry. User IO, failure rate, edit rate, user sentiment (frustrated, etc). concidering kafka..? havent gotten to use that yet, could be fun. I also have some Azure credits to use, so building it out with some bicep declaritive IoC would be good. what else... oh right, that leads to the next part
+- Store input/output for AI responses. Evaluate those and make sure they are not deviating. Create the curated dataset based on if they are good or not, then train the SML to check all resposnses and report success metrics. can we run these evals in a batch on a spot instace or slower azure functions? 
+- fine tuned small language model to do all the analysis on the device. Can make calls to the llm if sml cant fingure it out or needs function calling (search)
 - write an actual readme, not a todo list lmao
 - really consider how many fucks i actually give about this project
+- edit for food items should have slider. if you slide from left to right you should be able to speak to edit. The new data and old data are both sent to the ai api
+- Log user inputs and AI outputs. All of them. Have a place in the app to view it (small button, used for develoment to quickly see logs about whats going on)
