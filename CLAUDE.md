@@ -61,3 +61,29 @@ VibeTrack is a voice-first nutrition tracking iOS app with SwiftUI and MVVM arch
 **API Integration**: Claude API calls include input/output logging for debugging and evaluation. Mock responses available when API key missing.
 
 **Data Persistence**: UserDefaults for simplicity (Core Data deemed overkill for this scope).
+
+## Git Workflow
+
+**Branch Strategy**:
+- Always create a new branch when starting a new feature
+- Branch from `main`: `git checkout main && git pull && git checkout -b CC/feature-name`
+- Branch naming: Use prefix `CC/` followed by descriptive name (e.g., `CC/voice-editing`, `CC/swipe-gestures`)
+- Commits are allowed on feature branches
+- **NEVER commit directly to `main` branch**
+
+**Development Process**:
+1. Create feature branch: `git checkout -b CC/your-feature-name`
+2. Make changes and commit regularly to feature branch
+3. When feature is complete, create pull request to merge into `main`
+4. Feature branches can be deleted after successful merge
+
+**Example Workflow**:
+```bash
+git checkout main
+git pull
+git checkout -b CC/semantic-caching
+# Make changes...
+git add .
+git commit -m "Implement semantic caching layer"
+# Continue development with regular commits
+```

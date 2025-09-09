@@ -77,7 +77,7 @@ JSON
 
 - Log user inputs and AI outputs - All of them. Have a place in the app to view it (small button, used for development to quickly see logs about what's going on).
 
-- Edit food items with swipe gesture. For example: 'Actually it was a large fries' or 'Add 100 more calories' - If you slide from left to right you should be able to speak to edit. The new data and old data are both sent to the AI API. When clicked, immediatly start the recording. Offer a button to stop recording, then send the success mesasge with details. It could be cool if the updated entry in the list was sort of highlighted and then the highlight quickly fades to the regular coloring as a way to signify: Here's what you changed!. 
+- Edit food items with swipe gesture. For example: 'Actually it was a large fries' or 'Add 100 more calories' - If you slide from left to right you should get a button to edit. the button when clicked will start recording.you should be able to speak to edit. The new data and old data are both sent to the AI API. When clicked, immediatly start the recording, no need to ask for confirmation. The record button turns into a button to stop recording. then send the success mesasge with details which could be like a toast message or something. 
 - Update all the ui copy to have better vibes. pull it all out into a file for all the text that gets displayed to the user so we can see it all in one place. The tone we're going for is somwhere btween tech bro and gen z slag. Its all about the vibes.
 - additional way to navigate app. swipe gesture beteen views. so you can move from track view to enties view by swiping the screen from right to left.
 
