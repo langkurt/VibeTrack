@@ -29,10 +29,10 @@ struct EntriesListView: View {
                         Image(systemName: "fork.knife.circle")
                             .font(.system(size: 60))
                             .foregroundColor(.gray)
-                        Text("No meals logged")
+                        Text(UICopy.EntriesList.emptyStateTitle)
                             .font(.headline)
                             .foregroundColor(.secondary)
-                        Text("Tap the mic and tell me what you've eaten!")
+                        Text(UICopy.EntriesList.emptyStateMessage)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -64,7 +64,7 @@ struct EntriesListView: View {
                     .background(Color.clear) // Make list background transparent
                 }
             }
-            .navigationTitle("Food Log")
+            .navigationTitle(UICopy.EntriesList.title)
             .sheet(item: $editingEntry) { entry in
                 EditEntryView(entry: entry, dataStore: dataStore)
             }

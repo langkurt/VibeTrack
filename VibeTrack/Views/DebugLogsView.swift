@@ -30,8 +30,8 @@ struct DebugLogsView: View {
             VStack(spacing: 0) {
                 // Tab Picker
                 Picker("View", selection: $selectedTab) {
-                    Text("AI Interactions").tag(0)
-                    Text("System Logs").tag(1)
+                    Text(UICopy.Debug.aiInteractionsTab).tag(0)
+                    Text(UICopy.Debug.systemLogsTab).tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
@@ -44,17 +44,17 @@ struct DebugLogsView: View {
                     systemLogsView
                 }
             }
-            .navigationTitle("Debug Logs")
+            .navigationTitle(UICopy.Debug.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Button(action: { exportLogs() }) {
-                            Label("Export Logs", systemImage: "square.and.arrow.up")
+                            Label(UICopy.Debug.exportButton, systemImage: "square.and.arrow.up")
                         }
                         
                         Button(action: { clearLogs() }) {
-                            Label("Clear All", systemImage: "trash")
+                            Label(UICopy.Debug.clearButton, systemImage: "trash")
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -74,9 +74,9 @@ struct DebugLogsView: View {
                     Image(systemName: "bubble.left.and.bubble.right")
                         .font(.system(size: 50))
                         .foregroundColor(.gray)
-                    Text("No AI interactions yet")
+                    Text(UICopy.Debug.noInteractionsTitle)
                         .foregroundColor(.secondary)
-                    Text("Start using voice input to see interactions")
+                    Text(UICopy.Debug.noInteractionsMessage)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -97,7 +97,7 @@ struct DebugLogsView: View {
                         }
                         
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Input:")
+                            Text(UICopy.Debug.inputLabel)
                                 .font(.caption)
                                 .fontWeight(.semibold)
                             Text(interaction.input)
@@ -108,7 +108,7 @@ struct DebugLogsView: View {
                                 .cornerRadius(6)
                             
                             if let output = interaction.output {
-                                Text("Output:")
+                                Text(UICopy.Debug.outputLabel)
                                     .font(.caption)
                                     .fontWeight(.semibold)
                                     .padding(.top, 4)
@@ -157,7 +157,7 @@ struct DebugLogsView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.secondary)
-                    TextField("Search logs...", text: $searchText)
+                    TextField(UICopy.Debug.searchPlaceholder, text: $searchText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.horizontal)
@@ -171,7 +171,7 @@ struct DebugLogsView: View {
                     Image(systemName: "doc.text.magnifyingglass")
                         .font(.system(size: 50))
                         .foregroundColor(.gray)
-                    Text(searchText.isEmpty ? "No logs available" : "No matching logs")
+                    Text(searchText.isEmpty ? UICopy.Debug.noLogsTitle : "No matching logs")
                         .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

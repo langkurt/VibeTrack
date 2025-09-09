@@ -8,11 +8,11 @@ struct EditEntryView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section("Food Details") {
-                    TextField("Name", text: $entry.name)
+                Section(UICopy.EditEntry.sectionFood) {
+                    TextField(UICopy.EditEntry.nameField, text: $entry.name)
                     
                     HStack {
-                        Text("Calories")
+                        Text(UICopy.EditEntry.caloriesField)
                         Spacer()
                         TextField("0", value: $entry.calories, format: .number)
                             .multilineTextAlignment(.trailing)
@@ -20,9 +20,9 @@ struct EditEntryView: View {
                     }
                 }
                 
-                Section("Macros (grams)") {
+                Section(UICopy.EditEntry.sectionMacros) {
                     HStack {
-                        Text("Protein")
+                        Text(UICopy.EditEntry.proteinField)
                         Spacer()
                         TextField("0", value: $entry.protein, format: .number)
                             .multilineTextAlignment(.trailing)
@@ -30,7 +30,7 @@ struct EditEntryView: View {
                     }
                     
                     HStack {
-                        Text("Carbs")
+                        Text(UICopy.EditEntry.carbsField)
                         Spacer()
                         TextField("0", value: $entry.carbs, format: .number)
                             .multilineTextAlignment(.trailing)
@@ -38,7 +38,7 @@ struct EditEntryView: View {
                     }
                     
                     HStack {
-                        Text("Fat")
+                        Text(UICopy.EditEntry.fatField)
                         Spacer()
                         TextField("0", value: $entry.fat, format: .number)
                             .multilineTextAlignment(.trailing)
@@ -46,29 +46,29 @@ struct EditEntryView: View {
                     }
                 }
                 
-                Section("Time") {
-                    DatePicker("When", selection: $entry.timestamp)
+                Section(UICopy.EditEntry.sectionTime) {
+                    DatePicker(UICopy.EditEntry.timestampField, selection: $entry.timestamp)
                 }
                 
                 if let assumptions = entry.llmAssumptions {
-                    Section("AI Assumptions") {
+                    Section(UICopy.EditEntry.sectionAssumptions) {
                         Text(assumptions)
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
                 }
             }
-            .navigationTitle("Edit Entry")
+            .navigationTitle(UICopy.EditEntry.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button(UICopy.EditEntry.cancelButton) {
                         LogManager.shared.log("Edit cancelled for: \(entry.name)", category: .ui)
                         dismiss()
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
+                    Button(UICopy.EditEntry.saveButton) {
                         LogManager.shared.log("Saving edits for: \(entry.name)", category: .ui)
                         dataStore.updateEntry(entry)
                         dismiss()

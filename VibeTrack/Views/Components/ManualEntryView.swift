@@ -10,13 +10,13 @@ struct ManualEntryView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                Text("Type what you ate")
+                Text(UICopy.ManualEntry.title)
                     .font(.headline)
                     .padding(.top)
                 
                 // Smaller, more controlled text input
                 VStack(alignment: .leading, spacing: 8) {
-                    TextField("e.g., \"Had eggs for breakfast, salad for lunch\"", text: $textInput, axis: .vertical)
+                    TextField(UICopy.ManualEntry.placeholder, text: $textInput, axis: .vertical)
                         .textFieldStyle(.roundedBorder)
                         .lineLimit(3...6)
                         .focused($isTextFieldFocused)
@@ -25,7 +25,7 @@ struct ManualEntryView: View {
                         }
                     
                     if textInput.isEmpty {
-                        Text("Try: \"2 eggs and toast\" or \"Large coffee with milk\"")
+                        Text(UICopy.ManualEntry.hint)
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -42,7 +42,7 @@ struct ManualEntryView: View {
                                 .scaleEffect(0.8)
                                 .tint(.white)
                         }
-                        Text(isSubmitting ? "Processing..." : "Log Food")
+                        Text(isSubmitting ? UICopy.ManualEntry.submitButtonProcessing : UICopy.ManualEntry.submitButton)
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -53,11 +53,11 @@ struct ManualEntryView: View {
                 .padding()
                 .disabled(textInput.isEmpty || isSubmitting)
             }
-            .navigationTitle("Manual Entry")
+            .navigationTitle(UICopy.ManualEntry.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button(UICopy.ManualEntry.cancelButton) {
                         LogManager.shared.log("Manual entry cancelled", category: .ui)
                         dismissView()
                     }
@@ -65,7 +65,7 @@ struct ManualEntryView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button(UICopy.ManualEntry.doneButton) {
                         isTextFieldFocused = false
                     }
                 }

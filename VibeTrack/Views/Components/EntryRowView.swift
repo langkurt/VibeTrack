@@ -9,21 +9,21 @@ struct EntryRowView: View {
                 Text(entry.name)
                     .font(.headline)
                 Spacer()
-                Text("\(entry.calories) cal")
+                Text(String(format: UICopy.EntriesList.caloriesFormat, entry.calories))
                     .font(.subheadline)
                     .fontWeight(.semibold)
             }
             
             HStack(spacing: 12) {
-                Label("\(Int(entry.protein))g", systemImage: "p.square.fill")
+                Label(String(format: UICopy.EntriesList.proteinLabel, Int(entry.protein)), systemImage: "p.square.fill")
                     .font(.caption)
                     .foregroundColor(.orange)
                 
-                Label("\(Int(entry.carbs))g", systemImage: "c.square.fill")
+                Label(String(format: UICopy.EntriesList.carbsLabel, Int(entry.carbs)), systemImage: "c.square.fill")
                     .font(.caption)
                     .foregroundColor(.blue)
                 
-                Label("\(Int(entry.fat))g", systemImage: "f.square.fill")
+                Label(String(format: UICopy.EntriesList.fatLabel, Int(entry.fat)), systemImage: "f.square.fill")
                     .font(.caption)
                     .foregroundColor(.purple)
                 

@@ -5,7 +5,7 @@ struct ChartsView: View {
     @ObservedObject var dataStore: FoodDataStore
     @State private var selectedTimeRange = 0
     
-    var timeRanges = ["Week", "Month", "3 Months"]
+    var timeRanges = [UICopy.Charts.timeRangeWeek, UICopy.Charts.timeRangeMonth, UICopy.Charts.timeRangeQuarter]
     
     var daysToShow: Int {
         switch selectedTimeRange {
@@ -37,7 +37,7 @@ struct ChartsView: View {
                         
                         // Today's Summary
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Today's Summary")
+                            Text(UICopy.Charts.todaysSummaryHeader)
                                 .font(.headline)
                             
                             let totals = dataStore.todaysTotals()
@@ -47,7 +47,7 @@ struct ChartsView: View {
                                     Text("\(totals.calories)")
                                         .font(.title2)
                                         .fontWeight(.bold)
-                                    Text("Calories")
+                                    Text(UICopy.Charts.caloriesLabel)
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                 }
@@ -57,7 +57,7 @@ struct ChartsView: View {
                                         .font(.title3)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.orange)
-                                    Text("Protein")
+                                    Text(UICopy.Charts.proteinLabel)
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                 }
@@ -67,7 +67,7 @@ struct ChartsView: View {
                                         .font(.title3)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.blue)
-                                    Text("Carbs")
+                                    Text(UICopy.Charts.carbsLabel)
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                 }
@@ -77,7 +77,7 @@ struct ChartsView: View {
                                         .font(.title3)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.purple)
-                                    Text("Fat")
+                                    Text(UICopy.Charts.fatLabel)
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                 }
@@ -91,7 +91,7 @@ struct ChartsView: View {
                         
                         // Calories Chart
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Daily Calories")
+                            Text(UICopy.Charts.dailyCaloriesHeader)
                                 .font(.headline)
                                 .padding(.horizontal)
                             
@@ -117,7 +117,7 @@ struct ChartsView: View {
                         
                         // Macro Distribution Chart
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Macro Distribution (Last 7 Days)")
+                            Text(UICopy.Charts.macroDistributionHeader)
                                 .font(.headline)
                                 .padding(.horizontal)
                             
@@ -130,9 +130,9 @@ struct ChartsView: View {
                             let totalFat = last7Days.reduce(0.0) { $0 + $1.fat }
                             
                             let macroData = [
-                                ("Protein", totalProtein, Color.orange),
-                                ("Carbs", totalCarbs, Color.blue),
-                                ("Fat", totalFat, Color.purple)
+                                (UICopy.Charts.proteinLabel, totalProtein, Color.orange),
+                                (UICopy.Charts.carbsLabel, totalCarbs, Color.blue),
+                                (UICopy.Charts.fatLabel, totalFat, Color.purple)
                             ]
                             
                             if totalProtein > 0 || totalCarbs > 0 || totalFat > 0 {
@@ -152,14 +152,14 @@ struct ChartsView: View {
                                             Circle()
                                                 .fill(item.2)
                                                 .frame(width: 12, height: 12)
-                                            Text("\(item.0): \(Int(item.1))g")
+                                            Text(String(format: UICopy.Charts.macroFormat, item.0, Int(item.1)))
                                                 .font(.caption)
                                         }
                                     }
                                 }
                                 .padding(.horizontal)
                             } else {
-                                Text("No macro data for the last 7 days")
+                                Text(UICopy.Charts.noDataMessage)
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                     .frame(height: 200)
@@ -171,7 +171,7 @@ struct ChartsView: View {
                     }
                 }
             }
-            .navigationTitle("Trends")
+            .navigationTitle(UICopy.Charts.title)
         }
         .onAppear {
             LogManager.shared.log("ChartsView appeared", category: .ui)

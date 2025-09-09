@@ -13,13 +13,13 @@ struct MainRecordingView: View {
             VStack(spacing: 24) {
                 // Header
                 VStack(spacing: 8) {
-                    Text("What did you eat?")
+                    Text(UICopy.Recording.mainPrompt)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     
                     let totals = dataStore.todaysTotals()
-                    Text("\(totals.calories) calories today")
+                    Text(String(format: UICopy.Recording.todaysSummary, totals.calories))
                         .font(.headline)
                         .foregroundColor(.white.opacity(0.9))
                 }
@@ -58,7 +58,7 @@ struct MainRecordingView: View {
                     }
                     
                     // Transcribed Text
-                    if !speechManager.transcribedText.isEmpty && speechManager.transcribedText != "Listening..." {
+                    if !speechManager.transcribedText.isEmpty && speechManager.transcribedText != UICopy.Recording.listeningActive {
                         Text(speechManager.transcribedText)
                             .font(.body)
                             .foregroundColor(.white)
@@ -83,7 +83,7 @@ struct MainRecordingView: View {
                                 .foregroundColor(.white)
                             
                             if dataStore.retryCount > 0 && dataStore.retryCount < 2 {
-                                Button("Try explaining again") {
+                                Button(UICopy.Recording.errorRetry) {
                                     speechManager.startRecording()
                                 }
                                 .buttonStyle(.borderedProminent)
@@ -98,7 +98,7 @@ struct MainRecordingView: View {
                     
                     // Manual Entry Option
                     Button(action: { showingManualEntry = true }) {
-                        Text("Or tap to type...")
+                        Text(UICopy.Recording.manualEntryHint)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -109,7 +109,7 @@ struct MainRecordingView: View {
                 // Recent Entries Preview
                 if !dataStore.entries.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Recent entries")
+                        Text(UICopy.Recording.recentEntriesHeader)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding(.horizontal)
@@ -122,7 +122,7 @@ struct MainRecordingView: View {
                                             .font(.caption)
                                             .fontWeight(.medium)
                                             .foregroundColor(.white)
-                                        Text("\(entry.calories) cal")
+                                        Text(String(format: UICopy.EntriesList.caloriesFormat, entry.calories))
                                             .font(.caption2)
                                             .foregroundColor(.white.opacity(0.7))
                                     }
