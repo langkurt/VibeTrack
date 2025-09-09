@@ -11,21 +11,27 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             MainRecordingView(dataStore: dataStore)
                 .tabItem {
-                    Label("Track", systemImage: "mic.fill")
+                    Label(UICopy.TabBar.trackTab, systemImage: "mic.fill")
                 }
                 .tag(0)
             
             EntriesListView(dataStore: dataStore)
                 .tabItem {
-                    Label("Entries", systemImage: "list.bullet")
+                    Label(UICopy.TabBar.entriesTab, systemImage: "list.bullet")
                 }
                 .tag(1)
             
             ChartsView(dataStore: dataStore)
                 .tabItem {
-                    Label("Trends", systemImage: "chart.line.uptrend.xyaxis")
+                    Label(UICopy.TabBar.trendsTab, systemImage: "chart.line.uptrend.xyaxis")
                 }
                 .tag(2)
+            
+            DebugLogsView()
+                .tabItem {
+                    Label(UICopy.Debug.title, systemImage: "wrench.and.screwdriver")
+                }
+                .tag(3)
         }
         .onAppear {
             // Set unselected tab icon color to white
