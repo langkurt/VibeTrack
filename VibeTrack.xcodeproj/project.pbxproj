@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		86C3024B2E70AE96002A0386 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 86C3024A2E70AE96002A0386 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		86B065532E6E20A1008BB7E7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		86B065432E6E209F008BB7E7 /* VibeTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VibeTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B065522E6E20A1008BB7E7 /* VibeTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VibeTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B0655C2E6E20A1008BB7E7 /* VibeTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VibeTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		86C3024A2E70AE96002A0386 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +93,7 @@
 		86B0653A2E6E209F008BB7E7 = {
 			isa = PBXGroup;
 			children = (
+				86C3024A2E70AE96002A0386 /* README.md */,
 				86B065452E6E209F008BB7E7 /* VibeTrack */,
 				86B065552E6E20A1008BB7E7 /* VibeTrackTests */,
 				86B0655F2E6E20A1008BB7E7 /* VibeTrackUITests */,
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C3024B2E70AE96002A0386 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,9 @@ class NutritionAPIService {
     func parseFood(from text: String, retryCount: Int = 0) async throws -> LLMResponse {
         LogManager.shared.log("Parsing food from text: '\(text)' (retry: \(retryCount))", category: .api)
         
+        // Store the input for logging
+        LogManager.shared.logAIInteraction(input: text, output: nil, type: .request)
+        
         // Check for API key
         guard ConfigManager.shared.hasValidAPIKey else {
             LogManager.shared.log("No valid API key, using mock response", category: .api)
@@ -71,11 +74,14 @@ class NutritionAPIService {
         
         // Parse the Claude response
         if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-            LogManager.shared.log("API Response received: \(json)", category: .api)
+            LogManager.shared.log("API Response received", category: .api)
             
             if let content = (json["content"] as? [[String: Any]])?.first,
                let responseText = content["text"] as? String {
                 LogManager.shared.log("Extracted response text: \(responseText)", category: .api)
+                
+                // Log the AI response
+                LogManager.shared.logAIInteraction(input: text, output: responseText, type: .response)
                 
                 if let responseData = responseText.data(using: .utf8) {
                     let llmResponse = try JSONDecoder().decode(LLMResponse.self, from: responseData)
@@ -171,12 +177,21 @@ class NutritionAPIService {
             ))
         }
         
-        LogManager.shared.log("Mock response generated with \(foods.count) items", category: .api)
-        
-        return LLMResponse(
+        let mockResponse = LLMResponse(
             foods: foods,
             confidence: 0.8,
-            notes: "Parsed \(foods.count) food item(s)"
+            notes: "These are estimates based on typical values"
         )
+        
+        // Log mock interaction
+        LogManager.shared.logAIInteraction(
+            input: text,
+            output: "Mock response: \(foods.count) items",
+            type: .response
+        )
+        
+        LogManager.shared.log("Mock response generated with \(foods.count) items", category: .api)
+        
+        return mockResponse
     }
 }
