@@ -101,7 +101,7 @@ struct UICopy {
     
     // MARK: - Debug View
     struct Debug {
-        static let title = "debug mode 🛠"
+        static let title = "debug mode"
         static let aiInteractionsTab = "ai convos"
         static let systemLogsTab = "system logs"
         
