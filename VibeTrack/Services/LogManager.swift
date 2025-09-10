@@ -103,6 +103,14 @@ class LogManager: ObservableObject {
             type: type
         )
         
+        // Print to console for debugging
+        print("🤖 AI \(type.rawValue.uppercased())")
+        print("Input: \(input)")
+        if let output = output {
+            print("Output: \(output)")
+        }
+        print("---")
+        
         DispatchQueue.main.async {
             self.aiInteractions.insert(interaction, at: 0)
             if self.aiInteractions.count > self.maxInteractions {

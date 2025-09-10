@@ -1,7 +1,7 @@
 import Foundation
 
 struct FoodEntry: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()  // Changed from let to var to allow ID preservation during edits
     var name: String
     var calories: Int
     var protein: Double
@@ -26,5 +26,12 @@ struct FoodEntry: Identifiable, Codable {
         self.llmAssumptions = llmAssumptions
         
         LogManager.shared.log("Created FoodEntry: \(name) - \(calories) cal", category: .data)
+    }
+    
+    // Helper method to create a copy with a specific ID
+    func withID(_ id: UUID) -> FoodEntry {
+        var copy = self
+        copy.id = id
+        return copy
     }
 }

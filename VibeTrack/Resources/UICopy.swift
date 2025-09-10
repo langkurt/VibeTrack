@@ -50,6 +50,13 @@ struct UICopy {
         static let carbsLabel = "%dg"
         static let fatLabel = "%dg"
         static let assumptionsPrefix = "ai notes: "
+        
+        // Voice editing
+        static let voiceEditButton = "speak to edit"
+        static let voiceEditPrompt = "say your correction..."
+        static let voiceEditDone = "done"
+        static let voiceEditingLabel = "editing:"
+        static let voiceEditSuccess = "✅ updated: %@"
     }
     
     // MARK: - Edit Entry

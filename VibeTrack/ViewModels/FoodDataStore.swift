@@ -6,6 +6,7 @@ class FoodDataStore: ObservableObject {
     @Published var errorMessage: String?
     @Published var lastLLMResponse: LLMResponse?
     @Published var retryCount = 0
+    @Published var lastEditSuccess: String?
     
     private let userDefaults = UserDefaults.standard
     private let entriesKey = "vibetrack_entries"
@@ -67,6 +68,82 @@ class FoodDataStore: ObservableObject {
                 self.errorMessage = "Hmm, I didn't catch that. Mind trying again?"
                 self.isLoading = false
             }
+        }
+    }
+    
+    func processVoiceEdit(for entry: FoodEntry, editText: String) async {
+        LogManager.shared.log("Processing voice edit for \(entry.name): \(editText)", category: .data)
+        
+        await MainActor.run {
+            isLoading = true
+            errorMessage = nil
+        }
+        
+        do {
+            let editedEntry = try await NutritionAPIService.shared.parseEdit(
+                originalEntry: entry,
+                editInstruction: editText
+            )
+            
+            await MainActor.run {
+                // Update the entry in the list
+                if let index = self.entries.firstIndex(where: { $0.id == entry.id }) {
+                    self.entries[index] = editedEntry
+                    self.saveEntries()
+                    
+                    // Create success message
+                    let message = self.createEditSuccessMessage(
+                        original: entry,
+                        edited: editedEntry,
+                        instruction: editText
+                    )
+                    self.lastEditSuccess = message
+                    
+                    LogManager.shared.log("Successfully edited entry: \(editedEntry.name)", category: .data)
+                }
+                
+                self.isLoading = false
+            }
+        } catch {
+            LogManager.shared.logError(error, category: .data)
+            await MainActor.run {
+                self.errorMessage = "couldn't process that edit, try again?"
+                self.isLoading = false
+                self.lastEditSuccess = "❌ couldn't update, try again"
+            }
+        }
+    }
+    
+    private func createEditSuccessMessage(original: FoodEntry, edited: FoodEntry, instruction: String) -> String {
+        // Detect what changed
+        var changes: [String] = []
+        
+        if original.name != edited.name {
+            changes.append("updated to \(edited.name)")
+        }
+        
+        let calDiff = edited.calories - original.calories
+        if calDiff != 0 {
+            if calDiff > 0 {
+                changes.append("+\(calDiff) cal")
+            } else {
+                changes.append("\(calDiff) cal")
+            }
+        }
+        
+        let proteinDiff = Int(edited.protein - original.protein)
+        if proteinDiff != 0 {
+            if proteinDiff > 0 {
+                changes.append("+\(proteinDiff)g protein")
+            } else {
+                changes.append("\(proteinDiff)g protein")
+            }
+        }
+        
+        if changes.isEmpty {
+            return "✅ got it! updated \(edited.name)"
+        } else {
+            return "✅ updated: \(changes.joined(separator: ", "))"
         }
     }
     
